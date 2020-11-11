@@ -1,0 +1,251 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    }
+
+#root {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+
+    }
+
+.App {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background: #2a4588;
+
+    }
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+$ContentFont: 'PT Sans', sans-serif;
+$TitleFont: 'Special Elite', cursive;
+    
+
+// --------------------------------------------------------------LandingPage----------------------------
+
+.titleAndNav {
+    width: 70%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+
+    .title {
+        margin-top: 1em;
+        margin-left: auto;
+        margin-right: auto;
+        font-family: $TitleFont;
+        font-size: 10rem;
+        text-align: center;
+        color: #e43f5a;
+    }
+
+    .userInput {
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    input {
+        width: 55%;
+        font-size: 2.8rem;
+        margin-top: 1em;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    select {
+        width: 15%;
+        font-size: 3rem;
+        margin-top: 1em;
+        margin-left: .25em;
+        margin-right: auto;
+    }
+
+    button {
+        font-size: 2em;
+        font-family: $ContentFont;
+        border: none;
+        width:30%;
+        height: auto;
+        margin: auto; 
+        border-radius: 10px;
+        background: #eb8394;
+
+        .link {
+            text-decoration: none;
+            color: black;
+        }
+    }
+}
+
+// ------------------------------------------------------------DashHome----------------------------
+
+.Nav {
+    width: 100%;
+    height: 3em;
+    background: rgba(34, 34, 34, 0.603);
+    border-radius: 0px 0px 10px 10px ;
+    display: flex;
+    flex-direction: row;
+
+    .navSettings {
+        font-family: $ContentFont;
+        font-size: 2em;
+        color: #f3f3f3;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 5%;
+    }
+}
+
+.DashHome {
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+
+    .WeatherWindow {
+        margin: auto;
+        width: 80%;
+        height: 85%;
+        background-color: #c3e0f8;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+
+        .weatherTitle{
+
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+
+            h1 {
+                width: fit-content;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: .9em;
+                margin-bottom: 0%;
+                font-family: $ContentFont;
+                font-size: 3.4rem;
+            }
+
+
+            h2 {
+                width: fit-content;
+                margin-left: auto;
+                margin-right: auto;
+                font-family: $ContentFont;
+                font-size: 1.5rem;
+            }
+
+
+            
+            .row {
+
+                h3 {
+                    width: fit-content;
+                    margin-left: auto;
+                    margin-right: auto;
+                    font-family: $ContentFont;
+                    font-size: 1.5rem;
+                }
+
+                img {
+                    margin-right: auto;
+                    margin-left: .5em;
+                    margin-top: 0%;
+                    width: auto;
+                    height: auto;
+                }
+
+                .nxtToImg {
+                    width: fit-content;
+                    margin-left: auto;
+                    font-family: $ContentFont;
+                    font-size: 1.5rem;
+                    text-align: center;
+                }
+
+            }
+
+        }
+
+
+
+        .sectionOne {
+            width: fit-content;
+            height: 100%;
+            margin: 1em;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border: solid rgb(73, 73, 73);
+
+            div {
+                margin: 1em;
+            }
+
+        }
+
+        .sectionTwo {
+            width: fit-content;
+            height: 100%;
+            margin-top: auto;
+            margin-bottom: auto;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            border: solid rgb(73, 73, 73);
+
+            div {
+                display: flex;
+                flex-direction: column;
+                margin: 1em;
+            }
+
+        }
+
+        .sectionThree {
+            width: 60%;
+            height: 100%;
+            margin-top: auto;
+            margin-bottom: auto;
+            margin-left: 1em;
+            margin-right:  1em;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            border: solid rgb(73, 73, 73);
+
+            div {
+
+                display: flex;
+                flex-direction: column;
+                margin: auto;
+                width: fit-content;
+
+            }
+
+        }
+    }
+
+
+}
