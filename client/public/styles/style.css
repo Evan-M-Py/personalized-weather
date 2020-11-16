@@ -1,6 +1,4 @@
 html, body {
-  height: 100%;
-  width: 100%;
   margin: 0;
   padding: 0;
 }
@@ -10,6 +8,7 @@ html, body {
   padding: 0;
   height: 100%;
   width: 100%;
+  min-height: 100vh;
 }
 
 .App {
@@ -17,7 +16,7 @@ html, body {
   padding: 0;
   height: 100%;
   width: 100%;
-  background: #2a4588;
+  background: #0e1730;
 }
 
 .row {
@@ -31,15 +30,9 @@ html, body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin-left: auto;
-  margin-right: auto;
 }
 
-.titleAndNav {
-  width: 70%;
-  height: 100%;
-  margin-left: auto;
-  margin-right: auto;
+.col {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -47,65 +40,15 @@ html, body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-}
-
-.titleAndNav .title {
-  margin-top: 1em;
-  margin-left: auto;
-  margin-right: auto;
-  font-family: "Special Elite", cursive;
-  font-size: 10rem;
-  text-align: center;
-  color: #e43f5a;
-}
-
-.titleAndNav .userInput {
-  margin-left: auto;
-  margin-right: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
 
-.titleAndNav input {
-  width: 55%;
-  font-size: 2.8rem;
-  margin-top: 1em;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.titleAndNav select {
-  width: 15%;
-  font-size: 3rem;
-  margin-top: 1em;
-  margin-left: .25em;
-  margin-right: auto;
-}
-
-.titleAndNav button {
-  font-size: 2em;
-  font-family: "PT Sans", sans-serif;
-  border: none;
-  width: 30%;
-  height: auto;
-  margin: auto;
-  border-radius: 10px;
-  background: #eb8394;
-}
-
-.titleAndNav button .link {
-  text-decoration: none;
-  color: black;
-}
-
 .Nav {
   width: 100%;
-  height: 3em;
-  background: rgba(34, 34, 34, 0.603);
+  height: 2em;
+  background: rgba(31, 30, 30, 0.603);
   border-radius: 0px 0px 10px 10px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -118,18 +61,13 @@ html, body {
 
 .Nav .navSettings {
   font-family: "PT Sans", sans-serif;
-  font-size: 2em;
+  font-size: 1em;
   color: #f3f3f3;
   margin-top: auto;
-  margin-bottom: auto;
   margin-left: 5%;
 }
 
 .DashHome {
-  width: 100%;
-  height: 100%;
-  margin-left: auto;
-  margin-right: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -137,13 +75,14 @@ html, body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  height: 100%;
+  width: 100%;
 }
 
 .DashHome .WeatherWindow {
-  margin: auto;
-  width: 80%;
-  height: 85%;
-  background-color: #c3e0f8;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
   border-radius: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -154,147 +93,218 @@ html, body {
           flex-direction: column;
 }
 
-.DashHome .WeatherWindow .weatherTitle {
+.DashHome .WeatherWindow h2 {
+  font-size: 3rem;
+  font-family: "PT Sans", sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  font-size: 8rem;
+}
+
+.DashHome .WeatherWindow .row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.DashHome .WeatherWindow .row iframe {
+  margin: auto;
+}
+
+.DashHome .WeatherWindow .row .currentHolder {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30em;
+  height: auto;
+  border: #e4f2ff solid;
+  border-radius: 20px;
+  background-color: #0e1730;
+  color: #e4f2ff;
+}
+
+.DashHome .WeatherWindow .row .currentHolder .col {
+  margin-top: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "PT Sans", sans-serif;
+}
+
+.DashHome .WeatherWindow .row .currentHolder .col h3 {
+  font-size: 2.25rem;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.DashHome .WeatherWindow .row .currentHolder .col h2 {
+  font-size: 1.5rem;
+  margin-top: 0%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.DashHome .WeatherWindow .row .currentHolder .col img {
+  margin-bottom: 0%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 35%;
+  height: auto;
+}
+
+.DashHome .WeatherWindow .row .currentHolder .colTwo {
+  background-color: #c3e0f81c;
+  border-radius: 12px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1em;
+  font-family: "PT Sans", sans-serif;
+  width: 80%;
+}
+
+.DashHome .WeatherWindow .row .currentHolder .colTwo h2 {
+  font-size: 1.5rem;
+  margin-left: 1em;
+  margin-right: auto;
+}
+
+.DashHome .WeatherWindow .rowTwo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.DashHome .WeatherWindow .rowTwo .fiveDayHolder {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 1em;
+  width: 25%;
+  border: #e4f2ff solid;
+  border-radius: 20px;
+  background-color: #0e1730;
+  color: #e4f2ff;
+}
+
+.DashHome .WeatherWindow .rowTwo .fiveDayHolder .col {
+  margin-top: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "PT Sans", sans-serif;
+}
+
+.DashHome .WeatherWindow .rowTwo .fiveDayHolder .col h3 {
+  font-size: 1.25rem;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.DashHome .WeatherWindow .rowTwo .fiveDayHolder .col h2 {
+  font-size: 1rem;
+  margin-top: 0%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.DashHome .WeatherWindow .rowTwo .fiveDayHolder .col img {
+  margin-bottom: 0%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+  height: auto;
+}
+
+.DashHome .WeatherWindow .rowTwo .fiveDayHolder .colTwo {
+  background-color: #c3e0f81c;
+  border-radius: 12px;
+  margin-top: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1em;
+  font-family: "PT Sans", sans-serif;
+  width: 80%;
+}
+
+.DashHome .WeatherWindow .rowTwo .fiveDayHolder .colTwo h2 {
+  font-size: 1rem;
+  margin-left: 1em;
+  margin-right: auto;
+}
+
+.DashHome .NewsWindow {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.DashHome .NewsWindow .articleHolder {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  width: 20em;
+  height: auto;
+  border: #e4f2ff solid;
+  border-radius: 8px;
+  background-color: #8f9bb9;
+  color: #030303;
+  font-family: "PT Sans", sans-serif;
+}
+
+.DashHome .NewsWindow .articleHolder .col {
   width: 80%;
   margin-left: auto;
   margin-right: auto;
 }
 
-.DashHome .WeatherWindow .weatherTitle h1 {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: .9em;
-  margin-bottom: 0%;
-  font-family: "PT Sans", sans-serif;
-  font-size: 3.4rem;
-}
-
-.DashHome .WeatherWindow .weatherTitle h2 {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-  font-family: "PT Sans", sans-serif;
+.DashHome .NewsWindow .articleHolder .col h3 {
   font-size: 1.5rem;
 }
 
-.DashHome .WeatherWindow .weatherTitle .row h3 {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-  font-family: "PT Sans", sans-serif;
-  font-size: 1.5rem;
-}
-
-.DashHome .WeatherWindow .weatherTitle .row img {
-  margin-right: auto;
-  margin-left: .5em;
-  margin-top: 0%;
-  width: auto;
+.DashHome .NewsWindow .articleHolder .col img {
+  width: 100%;
   height: auto;
-}
-
-.DashHome .WeatherWindow .weatherTitle .row .nxtToImg {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  margin-left: auto;
-  font-family: "PT Sans", sans-serif;
-  font-size: 1.5rem;
-  text-align: center;
-}
-
-.DashHome .WeatherWindow .sectionOne {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  height: 100%;
-  margin: 1em;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  border: solid #494949;
-}
-
-.DashHome .WeatherWindow .sectionOne div {
-  margin: 1em;
-}
-
-.DashHome .WeatherWindow .sectionTwo {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  height: 100%;
-  margin-top: auto;
-  margin-bottom: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  border: solid #494949;
-}
-
-.DashHome .WeatherWindow .sectionTwo div {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  margin: 1em;
-}
-
-.DashHome .WeatherWindow .sectionThree {
-  width: 60%;
-  height: 100%;
-  margin-top: auto;
-  margin-bottom: auto;
-  margin-left: 1em;
-  margin-right: 1em;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  border: solid #494949;
-}
-
-.DashHome .WeatherWindow .sectionThree div {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
   margin: auto;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
 }
 /*# sourceMappingURL=style.css.map */

@@ -1,67 +1,114 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { WeatherContext, LocationContext } from '../LocationContext';
+import CurrentWeather from './CurrentWeather';
+import FiveDayForecast from './FiveDayForecast';
 import axios from 'axios';
 
 function WeatherWindow() {
 
-    const [ cloudiness, setCloudiness ] = useState({});
-    const [ wind, setWind ] = useState({});
     const [ sunRiseSet, setSunRiseSet ] = useState({
         sunrise: '',
         sunset: ''
     });
-    const [ weatherDescript, setWeatherDescript ] = useState({}) 
+
     const [ weatherCurrent, setWeatherCurrent ] = useState({
         });
 
-        const [ locationSearch, setLocationSearch ] = useState({
-            city: '',
-            state: ''
-        })
+    const [ locationSearch, setLocationSearch ] = useState({
+        city: '',
+        state: ''
+    })
 
     const [ weather, setWeather ] = useContext(WeatherContext);
     const [ location, setLocation ] = useContext(LocationContext);
     const [ weatherForecastJsx, setWeatherForecastJsx ] = useState([]);
-
-
+    const [ fiveDayForecast, setFiveDayForecast ] = useState([])
 
     async function locationCall( city ) {
 
         const URL = await `http://api.openweathermap.org/data/2.5/weather?q=${location.city},${location.state}&units=imperial&appid=7a7853756f9d87676b784b679a2ff9a9`
         
-        const theCall = await axios({
+        const theCurrentCall = await axios({
 
             method: 'get',
             url: URL
 
             }).then(function(response) {
-                
+
+                let sunset = timeConverter(response.data.sys.sunset)
+                let sunrise = timeConverter(response.data.sys.sunrise)
+
                 const weatherInfoArray = [ response.data.main , {cloudiness: response.data.clouds}, {wind: response.data.wind.speed}, response.data.weather[0], response.data.sys.sunrise, response.data.sys.sunrise]
 
-            setWeatherCurrent( weatherInfoArray[0] );
-            setCloudiness( weatherInfoArray[1] );
-            setWind( weatherInfoArray[2] );
-            setWeatherDescript( weatherInfoArray[3] )
-            timeConverter('sunrise', weatherInfoArray[4])
-            timeConverter('sunset', weatherInfoArray[5])
+                let currentWeatherObj = {
 
+                    temp: response.data.main.temp,
+                    feelsLike: response.data.main.feels_like,
+                    tempMin: response.data.main.temp_min,
+                    tempMax: response.data.main.temp_max,
+                    humidity: response.data.main.humidity,
+                    cloudiness: response.data.clouds.all,
+                    wind: response.data.wind.speed,
+                    description: response.data.weather[0].description,
+                    icon: response.data.weather[0].icon,
+                    sunset: sunset,
+                    sunrise: sunrise
 
-        })
-        console.log(weatherCurrent)
-        console.log(wind)
-        console.log(weatherDescript)
-        console.log(theCall)
+                }
+
+            setWeatherCurrent( currentWeatherObj );
+            console.log(weatherCurrent)
+
+        });
+
+        const theFiveDayCall = await axios({
+
+            method: 'get',
+            url: `http://api.openweathermap.org/data/2.5/forecast?q=${location.city},${location.state}&units=imperial&appid=7a7853756f9d87676b784b679a2ff9a9`
+
+            }).then(function(response) {
+                
+                for (let i = 0; i < response.data.list.length; i++) {
+
+                    let res = response.data.list[i]
+
+                    let date = dateConverter(res.dt);
+
+                    if (res.dt_txt.slice(11,19) === '12:00:00') {
+
+                        let data = {
+
+                            date: date,
+                            temp: res.main.temp,
+                            feelsLike: res.main.feels_like,
+                            tempMax: res.main.temp_max,
+                            tempMin: res.main.temp_min,
+                            description: res.weather[0].description,
+                            clouds: res.clouds.all,
+                            icon: res.weather[0].icon, 
+                            humidity: res.main.humidity
+
+                        }
+
+                        setFiveDayForecast((prevState) => ([...prevState, {data}])) 
+
+                    };
+
+                }
+        
+        });
 
     };
 
-    async function timeConverter(which, U){
-        let a = await new Date(U * 1000);
-        let months = await ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-        let year = await a.getFullYear();
-        let month = await months[a.getMonth()];
-        let date = await a.getDate();
-        let hour = await a.getHours();
-        let min = await a.getMinutes();
+    const timeConverter = (U) => {
+
+        let a =  new Date(U * 1000);
+        let months =  ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        let year =  a.getFullYear();
+        let month =  months[a.getMonth()];
+        let date =  a.getDate();
+        let hour =  a.getHours();
+        let min =  a.getMinutes();
 
         let standardTime;
 
@@ -73,84 +120,109 @@ function WeatherWindow() {
             standardTime= "12";
           }
 
-        standardTime += await (min < 10) ? ":0" + min : ":" + min;
-        standardTime += await (hour >= 12) ? " P.M." : " A.M.";
+        standardTime +=  (min < 10) ? ":0" + min : ":" + min;
+        standardTime +=  (hour >= 12) ? " P.M." : " A.M.";
 
-        var time = await hour + ':' + min ;
+        var time =  hour + ':' + min ;
 
-        setSunRiseSet(prev => ({...prev, [which]: standardTime}));
-        console.log(sunRiseSet)
-        console.log(time)
+        return standardTime
 
-      }
+        };
 
+        const dateConverter = (U) => {
+
+            let a =  new Date(U * 1000);
+            let months =  ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            let year =  a.getFullYear();
+            let month =  months[a.getMonth()];
+            let date =  a.getDate();
+            let hour =  a.getHours();
+            let min =  a.getMinutes();
+    
+            let standardTime;
+    
+            if (hour > 0 && hour <= 12) {
+                standardTime= "" + hour;
+              } else if (hour > 12) {
+                standardTime= "" + (hour - 12);
+              } else if (hour == 0) {
+                standardTime= "12";
+              }
+    
+            standardTime +=  (min < 10) ? ":0" + min : ":" + min;
+            standardTime +=  (hour >= 12) ? " P.M." : " A.M.";
+    
+            let stringDate =  a.toDateString();
+            let stringMonth = stringDate.slice(4,7);
+            let stringDay = stringDate.slice(0,4);
+            stringDay += stringDate.slice(7,11) 
+
+            let dayObj = {
+                day: stringDay,
+                month: stringMonth
+            }
+    
+            return dayObj
+    
+            };
 
     const handleInputChange = (e) => {
+
         e.preventDefault();
+
         const { name, value } = e.target;
-        
     
         setLocation((prevState) => ({
           ...prevState, [name]: value
             })
         );
-        console.log(locationSearch)
 
-      };
+    };
 
-      useEffect(() => {
-            locationCall(location.city)
-      },[location])
+
+    useEffect(() => {
+
+        locationCall(location.city)
+
+      },[location]);
 
     return (
 
         <div className='WeatherWindow'>
 
-            <div className='weatherTitle'>
+            <div className='row'>
 
-                <h1>{location.city} {location.state}</h1>
-
-                <div className='row'>
-                    
-                    <p className='nxtToImg'>{weatherDescript.description}</p>
-                    <img src={`http://openweathermap.org/img/w/${weatherDescript.icon}.png`}/>
-                    
-                </div>
-
-                <div className='row'>
-
-                    <h2 >sunrise: {sunRiseSet.sunrise} - sunset: {sunRiseSet.sunset}</h2> 
-
-                </div>
-
-
-
-                <div className='row'>
-
-                    <h3>Tempurature: {weatherCurrent.temp} F</h3>
-                    
-                </div>
-
-                <div className='row'>
-
-                    <h3>High: {weatherCurrent.temp_max} / Low: {weatherCurrent.temp_min}</h3>
-                    
-                </div>
-
-                <div className='row'>
-
-                    
-                </div>
+                <h2>{location.city}, {location.state}</h2>
 
             </div>
             
+
+            <div className='row'>
+                
+                <CurrentWeather 
+                location={location} 
+                weather={weatherCurrent}
+                />
+
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/U900Q4Ok5DY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+           
+            </div>
+
+            <div className='rowTwo'>
+
+                {fiveDayForecast.map(fiveDay => {
+                        return(
+                            <FiveDayForecast 
+                            weather={fiveDay.data}
+                            />
+                        )
+                    })
+                }
+
+            </div>
         
-        <button onClick={(e) => locationCall(e)}>Console Log Btn</button>
-
-
-
         </div>
     )
-}
+};
 
 export default WeatherWindow;
